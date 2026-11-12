@@ -1,0 +1,84 @@
+{
+  "name": "freebuff-desktop",
+  "productName": "BOT.IA",
+  "version": "1.1.7",
+  "private": true,
+  "description": "Assistente pessoal local com modos de conversa e construção assistidos por IA; llama.app é o provedor padrão.",
+  "author": {
+    "name": "BOT.IA"
+  },
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "desktop": "node electron/launch.js",
+    "demo": "node tools/demo.js",
+    "analyze:root": "node tools/analyze-root.js",
+    "prep:pc": "node tools/pc-prep-checklist.js",
+    "test": "node --test --test-timeout=60000 \"test/*.test.js\" \"test/*.test.mjs\"",
+    "test:gate": "node --test --test-timeout=60000 \"test/*.test.js\" \"test/*.test.mjs\" && node --test --test-timeout=60000 \"test/crash/*.test.js\"",
+    "build:win": "electron-builder --win nsis --x64 --publish never",
+    "installer:win": "powershell -ExecutionPolicy Bypass -File ./estaladorbot/build-installer.ps1",
+    "check:build-ui": "node tools/check-installer-ui.js",
+    "test:crash": "node --test --test-timeout=60000 \"test/crash/*.test.js\"",
+    "audit:prod": "node tools/audit-prod.js",
+    "ensure:electron": "node tools/ensure-electron.js"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "devDependencies": {
+    "electron": "44.9.3",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.freebuff.desktop",
+    "productName": "BOT.IA",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron/**",
+      "server/**",
+      "public/index.html",
+      "public/shell.css",
+      "public/chatgpt-shell.css",
+      "public/chatgpt-shell.js",
+      "public/sse.js",
+      "workspace/**",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "workspace",
+        "to": "workspace"
+      }
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "BOT.IA-Setup-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "runAfterFinish": true,
+      "shortcutName": "BOT.IA",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico"
+    }
+  },
+  "allowScripts": {},
+  "overrides": {
+    "yauzl": "^3.4.0"
+  }
+}

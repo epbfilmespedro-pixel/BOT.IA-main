@@ -1,0 +1,52 @@
+# Dependências
+node_modules/
+
+# Dados de runtime do usuário (settings, conversas, memória, checkpoints e
+# projetos criados pela interface) — nunca versionados
+data/
+projects/
+
+# Saída de build: instaladores e binários gerados (electron-builder)
+dist/
+
+# Evidências e temporários de execução de testes e benchmarks
+.test-tmp/
+
+# Logs locais
+*.log
+
+# Overrides locais de ambiente — o contrato documentado (.env.example) É versionado
+.env
+
+# Cópias de backup locais (caso reapareçam)
+*.bak
+*.backup
+*.backup-*
+
+# Lixo de sistema
+.DS_Store
+Thumbs.db
+
+# --- tools/ram-bench -----------------------------------------------------------
+# Ignora apenas as EVIDÊNCIAS GERADAS (resultados, sandboxes, logs, snapshots).
+# Os scripts de benchmark (*.js/*.sh/*.ps1) e os relatórios (*.md) permanecem
+# rastreados por serem ferramenta de desenvolvimento.
+tools/ram-bench/results/
+tools/ram-bench/**/results/
+tools/ram-bench/**/sb/
+tools/ram-bench/**/isolated/
+tools/ram-bench/**/backup/
+tools/ram-bench/**/diagnostico/
+tools/ram-bench/**/rot/
+tools/ram-bench/**/log-*.txt
+tools/ram-bench/**/out-*.txt
+tools/ram-bench/**/out-*.json
+tools/ram-bench/**/*-report.json
+tools/ram-bench/**/LEGADO-*.json
+tools/ram-bench/**/settings-run*.json
+tools/ram-bench/**/manifest-*.json
+tools/ram-bench/**/*.orig
+
+
+# Instaladores anteriores preservados pelo script de build Windows
+dist-archive/
